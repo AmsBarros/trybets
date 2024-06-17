@@ -2,8 +2,6 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using TryBets.Matches.Repository;
 
-
-
 namespace TryBets.Matches.Controllers;
 
 [Route("[controller]")]
@@ -18,6 +16,6 @@ public class TeamController : Controller
     [HttpGet]
     public IActionResult Get()
     {
-        throw new NotImplementedException();
+        return Ok(_repository.Get());
     }
 }

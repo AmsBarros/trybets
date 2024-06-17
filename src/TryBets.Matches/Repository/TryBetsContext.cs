@@ -20,7 +20,8 @@ public class TryBetsContext : DbContext, ITryBetsContext
     }
 
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
 
         modelBuilder.Entity<Team>()
             .HasMany(t => t.MatchesA)
@@ -48,7 +49,5 @@ public class TryBetsContext : DbContext, ITryBetsContext
             .HasMany(t => t.Bets)
             .WithOne(b => b.Team)
             .HasForeignKey(b => b.TeamId);
-            
     }
-
 }
