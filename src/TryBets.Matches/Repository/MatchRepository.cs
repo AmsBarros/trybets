@@ -23,8 +23,22 @@ public class MatchRepository : IMatchRepository
                 MatchTeamBId = match.MatchTeamBId,
                 TeamAName = match.MatchTeamA!.TeamName,
                 TeamBName = match.MatchTeamB!.TeamName,
+                MatchTeamAOdds = CalculateOdds(match.MatchTeamAValue, match.MatchTeamBValue),
+                MatchTeamBOdds = CalculateOdds(match.MatchTeamBValue, match.MatchTeamAValue),
                 MatchFinished = match.MatchFinished,
                 MatchWinnerId = match.MatchWinnerId
             }).OrderBy(match => match.MatchId);
+    }
+
+    private static string CalculateOdds(decimal teamValue, decimal opponentTeamValue)
+    {
+        if (teamValue == 0 || opponentTeamValue == 0)
+        {
+            return "0.00";
+        }
+
+        decimal odds = (teamValue + opponentTeamValue) / teamValue;
+
+        return odds.ToString("F2");
     }
 }
