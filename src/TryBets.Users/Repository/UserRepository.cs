@@ -13,10 +13,25 @@ public class UserRepository : IUserRepository
 
     public User Post(User user)
     {
-        throw new NotImplementedException();
+        var userExists = _context.Users
+            .Any(u => u.Email == user.Email);
+
+        if (userExists)
+            throw new Exception("E-mail already used");
+
+        _context.Users.Add(user);
+        _context.SaveChanges();
+
+        return user;
     }
     public User Login(AuthDTORequest login)
     {
-       throw new NotImplementedException();
+        var user = _context.Users
+            .FirstOrDefault(u => u.Email == login.Email && u.Password == login.Password); 
+
+        if (user == null)
+            throw new Exception("Authentication failed");
+
+        return user;
     }
 }

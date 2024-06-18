@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 using TryBets.Users.Repository;
 using TryBets.Users.Services;
@@ -19,12 +18,30 @@ public class UserController : Controller
     [HttpPost("signup")]
     public IActionResult Post([FromBody] User user)
     {
-       throw new NotImplementedException();
+        try
+        {
+            var newUser = _repository.Post(user);
+            var token = new TokenManager().Generate(newUser);
+            return Created("User created", new AuthDTOResponse { Token = token });
+        }
+        catch (Exception error)
+        {
+            return BadRequest( new { message = error.Message });
+        }
     }
 
     [HttpPost("login")]
     public IActionResult Login([FromBody] AuthDTORequest login)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var user = _repository.Login(login);
+            var token = new TokenManager().Generate(user);
+            return Ok(new AuthDTOResponse { Token = token });
+        }
+        catch (Exception error)
+        {
+            return BadRequest(new { message = error.Message });
+        }
     }
 }
