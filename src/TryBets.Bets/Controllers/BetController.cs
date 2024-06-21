@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -26,7 +25,22 @@ public class BetController : Controller
     [Authorize(Policy = "Client")]
     public async Task<IActionResult> Post([FromBody] BetDTORequest request)
     {
-        throw new NotImplementedException();
+        var token = HttpContext.User.Identity as ClaimsIdentity;
+        var email = token?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+        if (token == null || email == null)
+        {
+            return Unauthorized();
+        }
+
+        try
+        {
+            return Created("Bet", _repository.Post(request, email));
+        }
+        catch (Exception error)
+        {
+            return BadRequest(new { message = error.Message });
+        }
     }
 
     [HttpGet("{BetId}")]
@@ -34,6 +48,21 @@ public class BetController : Controller
     [Authorize(Policy = "Client")]
     public IActionResult Get(int BetId)
     {
-        throw new NotImplementedException();
+        var token = HttpContext.User.Identity as ClaimsIdentity;
+        var email = token?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+        if (token == null || email == null)
+        {
+            return Unauthorized();
+        }
+
+        try
+        {
+            return Ok(_repository.Get(BetId, email));
+        }
+        catch (Exception error)
+        {
+            return BadRequest(new { message = error.Message });
+        }
     }
 }
