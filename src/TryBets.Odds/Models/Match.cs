@@ -16,6 +16,4 @@ public class Match
     public virtual Team? MatchTeamA { get; set; }
     public virtual Team? MatchTeamB { get; set; }
     public virtual ICollection<Bet>? Bets { get; set;}
-    
-    
 }

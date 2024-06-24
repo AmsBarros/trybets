@@ -35,7 +35,10 @@ public class BetController : Controller
 
         try
         {
-            return Created("Bet", _repository.Post(request, email));
+            var bet = _repository.Post(request, email);
+            await _oddService.UpdateOdd(request.MatchId, request.TeamId, request.BetValue);
+
+            return Ok(bet);
         }
         catch (Exception error)
         {

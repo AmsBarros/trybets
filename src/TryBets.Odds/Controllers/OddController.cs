@@ -1,8 +1,4 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Security.Claims;
 using TryBets.Odds.Repository;
 
 namespace TryBets.Odds.Controllers;
@@ -17,9 +13,15 @@ public class OddController : Controller
     }
 
     [HttpPatch("{MatchId:int}/{TeamId:int}/{BetValue}")]
-
     public IActionResult Patch(int MatchId, int TeamId, string BetValue)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return Ok(_repository.Patch(MatchId, TeamId, BetValue));
+        }
+        catch (Exception error)
+        {
+            return BadRequest(new { message = error.Message });
+        }
     }
 }

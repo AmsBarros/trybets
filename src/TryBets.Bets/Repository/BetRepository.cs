@@ -40,7 +40,7 @@ public class BetRepository : IBetRepository
             UserId = _context.Users.FirstOrDefault(u => u.Email == email)!.UserId,
             MatchId = betRequest.MatchId,
             TeamId = betRequest.TeamId,
-            BetValue = betRequest.BetValue,
+            BetValue = betRequest.BetValue
         };
 
         _context.Bets.Add(bet);
