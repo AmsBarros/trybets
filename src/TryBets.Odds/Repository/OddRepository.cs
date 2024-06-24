@@ -1,6 +1,4 @@
 using TryBets.Odds.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Globalization;
 
 namespace TryBets.Odds.Repository;
