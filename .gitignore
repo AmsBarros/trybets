@@ -1,0 +1,18 @@
+# Arquivos de build e cache
+**/bin/
+**/obj/
+**/*.cache
+
+# Arquivos de configuração do IDE
+.vscode/
+.idea/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Dependências
+node_modules/
