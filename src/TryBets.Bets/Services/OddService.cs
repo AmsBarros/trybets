@@ -10,10 +10,9 @@ public class OddService : IOddService
 
     public async Task<object> UpdateOdd(int MatchId, int TeamId, decimal BetValue)
     {
-        /* var response = await _client.PatchAsync($"http://localhost:5504/Odd/{MatchId}/{TeamId}/{BetValue}", null);
+        var response = await _client.PatchAsync($"http://localhost:5504/Odd/{MatchId}/{TeamId}/{BetValue}", null);
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadAsStringAsync(); */
-        throw new NotImplementedException();
+        return await response.Content.ReadAsStringAsync();
     }
 }
