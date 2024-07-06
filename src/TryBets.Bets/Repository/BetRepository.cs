@@ -19,12 +19,12 @@ public class BetRepository : IBetRepository
         
         if (team == null)
         {
-            throw new ArgumentException("Team not founded");
+            throw new ArgumentException("Team not found");
         }
 
         if (match == null)
         {
-            throw new ArgumentException("Match not founded");
+            throw new ArgumentException("Match not found");
         }
 
         if (match.MatchFinished)
@@ -63,7 +63,7 @@ public class BetRepository : IBetRepository
         var bet = _context.Bets.Include(b => b.Match).Include(b => b.Team).FirstOrDefault(b => b.BetId == BetId);
         if (bet == null)
         {
-            throw new ArgumentException("Bet not founded");
+            throw new ArgumentException("Bet not found");
         }
 
         var user = _context.Users.FirstOrDefault(u => u.Email == email);
