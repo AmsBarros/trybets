@@ -1,7 +1,6 @@
 using TryBets.DTO;
 using TryBets.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace TryBets.Repository;
 
@@ -16,13 +15,13 @@ public class BetRepository : IBetRepository
     public BetDTOResponse Post(BetDTORequest betRequest, string email)
     {
         User findedUser = _context.Users.FirstOrDefault(x => x.Email == email)!;
-        if (findedUser == null) throw new Exception("User not founded");
+        if (findedUser == null) throw new Exception("User not found");
 
         Match findedMatch = _context.Matches.FirstOrDefault(m => m.MatchId == betRequest.MatchId)!;
-        if (findedMatch == null) throw new Exception("Match not founded");
+        if (findedMatch == null) throw new Exception("Match not found");
 
         Team findedTeam = _context.Teams.FirstOrDefault(t => t.TeamId == betRequest.TeamId)!;
-        if (findedTeam == null) throw new Exception("Team not founded");
+        if (findedTeam == null) throw new Exception("Team not found");
 
         if (findedMatch.MatchFinished) throw new Exception("Match finished");
 
@@ -59,10 +58,10 @@ public class BetRepository : IBetRepository
     public BetDTOResponse Get(int BetId, string email)
     {
         User findedUser = _context.Users.FirstOrDefault(x => x.Email == email)!;
-        if (findedUser == null) throw new Exception("User not founded");
+        if (findedUser == null) throw new Exception("User not found");
 
         Bet findedBet = _context.Bets.Include(b => b.Team).Include(b => b.Match).Where(b => b.BetId == BetId).FirstOrDefault()!;
-        if (findedBet == null) throw new Exception("Bet not founded");
+        if (findedBet == null) throw new Exception("Bet not found");
 
         if (findedBet.User!.Email != email) throw new Exception("Bet view not allowed");
 

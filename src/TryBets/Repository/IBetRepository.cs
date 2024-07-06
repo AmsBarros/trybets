@@ -1,5 +1,4 @@
 using TryBets.DTO;
-using TryBets.Models;
 
 namespace TryBets.Repository;
 

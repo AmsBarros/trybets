@@ -1,11 +1,9 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Security.Claims;
 using TryBets.Repository;
 using TryBets.DTO;
-
 
 namespace TryBets.Controllers;
 
