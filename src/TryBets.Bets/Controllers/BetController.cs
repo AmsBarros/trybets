@@ -6,7 +6,6 @@ using TryBets.Bets.Repository;
 using TryBets.Bets.DTO;
 using TryBets.Bets.Services;
 
-
 namespace TryBets.Bets.Controllers;
 
 [Route("[controller]")]
