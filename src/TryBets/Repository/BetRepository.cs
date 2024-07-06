@@ -1,7 +1,6 @@
 using TryBets.DTO;
 using TryBets.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace TryBets.Repository;
 

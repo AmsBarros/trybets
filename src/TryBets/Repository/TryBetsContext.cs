@@ -22,7 +22,6 @@ public class TryBetsContext : DbContext, ITryBetsContext
         optionsBuilder.UseSqlServer(connectionString);
     }
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
         modelBuilder.Entity<Team>()
@@ -50,8 +49,6 @@ public class TryBetsContext : DbContext, ITryBetsContext
         modelBuilder.Entity<Team>()
             .HasMany(t => t.Bets)
             .WithOne(b => b.Team)
-            .HasForeignKey(b => b.TeamId);
-            
+            .HasForeignKey(b => b.TeamId);   
     }
-
 }
